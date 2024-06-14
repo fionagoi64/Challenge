@@ -19,6 +19,10 @@ const Navbar = () => {
     const handleOpenSideMenu = () => {
         setSideMenuOpen(!openSideMenu);
       };
+
+    const handleDropdownMenu = () => {
+        setDropdownOpen(!openDropdownMenu);
+      };
     
     const links =[
         {
@@ -77,18 +81,18 @@ const Navbar = () => {
                 <ul className='md:flex hidden gap-12'>
                   {links.map((links) => (
                     <li>
-                    <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
-                        <a href='#' className='cursor-pointer hover:text-almost-black'> {links.label} </a>
+                    <button className='flex items-center gap-3' onClick={handleDropdownMenu}>
+                        <h1 className='cursor-pointer hover:text-almost-black'> {links.label} </h1>
                         <img src={links.icon} alt="" />
                     </button>
                   
                   {links.dropdown && (
-                  <div className={`absolute bg-white rounded-lg shadow-md p-3 mt-5  ${openDropdownMenu === links.label ? 'md:flex':'hidden'}`}>
+                  <div className={`absolute bg-white rounded-lg shadow-md p-3 mt-5  ${openDropdownMenu === true ? 'md:flex':'hidden'}`}>
                     <ul>
                        { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 '>
                            <img src={items.icon} alt="" />
-                           <a href='#'>{items.label}</a>
+                           <h1>{items.label}</h1>
                         </li>
                        ))}
                     </ul>
@@ -122,19 +126,19 @@ const Navbar = () => {
         <ul className='space-y-4'>
             {links.map((links) => (
                 <li>
-                    <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
-                    <a href='#'>{links.label}</a>
+                    <button className='flex items-center gap-3' onClick={handleDropdownMenu}>
+                    <h1>{links.label}</h1>
                     <img src={links.icon} alt="" />
                     </button>
                     
                
                {links.dropdown && (
-                <div className={`${openDropdownMenu === links.label ? 'md:hidden':'hidden'}`}>
+                <div className={`${openDropdownMenu === true ? 'md:flex':'hidden'}`}>
                     <ul>
                     { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 ml-3'>
                            <img src={items.icon} alt="" />
-                           <a href='#'>{items.label}</a>
+                           <h1>{items.label}</h1>
                         </li>
                        ))}
                     </ul>
