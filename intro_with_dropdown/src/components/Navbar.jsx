@@ -78,7 +78,7 @@ const Navbar = () => {
                   {links.map((links) => (
                     <li>
                     <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
-                        <a href='/' className='cursor-pointer hover:text-almost-black'> {links.label} </a>
+                        <a href='#' className='cursor-pointer hover:text-almost-black'> {links.label} </a>
                         <img src={links.icon} alt="" />
                     </button>
                   
@@ -88,7 +88,7 @@ const Navbar = () => {
                        { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 '>
                            <img src={items.icon} alt="" />
-                           <a href='/'>{items.label}</a>
+                           <a href='#'>{items.label}</a>
                         </li>
                        ))}
                     </ul>
@@ -123,7 +123,7 @@ const Navbar = () => {
             {links.map((links) => (
                 <li>
                     <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
-                    <a href='/'>{links.label}</a>
+                    <a href='#'>{links.label}</a>
                     <img src={links.icon} alt="" />
                     </button>
                     
@@ -134,7 +134,7 @@ const Navbar = () => {
                     { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 ml-3'>
                            <img src={items.icon} alt="" />
-                           <a href='/'>{items.label}</a>
+                           <a href='#'>{items.label}</a>
                         </li>
                        ))}
                     </ul>
