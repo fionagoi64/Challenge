@@ -14,16 +14,17 @@ import planning from "../images/icon-planning.svg"
 
 const Navbar = () => {
 
-    const [openSideMenu, SetSideMenuOpen] = useState(false);
+    const [openSideMenu, setSideMenuOpen] = useState(false);
+    const [openDropdownMenu, setDropdownOpen] = useState(false);
     
-    const handleOpenMenu = () => {
-        SetSideMenuOpen(!openSideMenu);
+    const handleOpenSideMenu = () => {
+        setSideMenuOpen(!openSideMenu);
       };
     
     const links =[
         {
             label:"Features",
-            icon:openDropMenu,
+            icon: openDropdownMenu === "Features" ? closeDropMenu:openDropMenu,
             dropdown: true,
             list_items:[
                 {
@@ -46,7 +47,7 @@ const Navbar = () => {
         },
         {
             label:"Company",
-            icon:openDropMenu,
+            icon: openDropdownMenu === "Company" ? closeDropMenu:openDropMenu,
             dropdown: true,
             list_items:[
                 {
@@ -69,20 +70,21 @@ const Navbar = () => {
     ]
 
   return (
-    <nav className='flex items-center justify-between mx-4 my-5'>
+    <nav>
         {/* web: nav menu */}
+        <div className='px-6 flex items-center justify-between my-5'>
             <div className='flex items-center gap-12'>
                 <img src={logo} alt='' className='cursor-pointer'/>
                 <ul className='md:flex hidden gap-12'>
                   {links.map((links) => (
-                    <li className='cursor-pointer hover:text-almost-black group'>
-                        <div>
-                    <a> {links.label} </a>
-                    <img src={links.icon} alt="" />
-                  </div>
+                    <li>
+                    <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
+                        <a className='cursor-pointer hover:text-almost-black'> {links.label} </a>
+                        <img src={links.icon} alt="" />
+                    </button>
                   
                   {links.dropdown && (
-                  <div className='absolute bg-white rounded-lg shadow-md p-3 mt-5 hidden group-hover:md:block hover:md:block'>
+                  <div className={`absolute bg-white rounded-lg shadow-md p-3 mt-5  ${openDropdownMenu === links.label ? 'md:flex':'hidden'}`}>
                     <ul>
                        { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 '>
@@ -104,23 +106,31 @@ const Navbar = () => {
                 <button className='border-2 px-3 py-1 rounded-lg'>Register</button>
             </div>
 
-            <button onClick={handleOpenMenu} className='md:hidden absolute right-5 top-4 z-10'>
+            <button onClick={handleOpenSideMenu} className='md:hidden absolute right-5 top-4 z-30'>
                 {openSideMenu ? (
                     <img src={closeMenu} alt=""/>
                     ) : (
                     <img src={menuOpen} alt=""/>
                     )}
             </button>
+            </div>
+
+            <div className={`absolute bg-almost-black w-full h-full z-20 opacity-80 bottom-0 ${openSideMenu ? "md:hidden":"hidden"}`}></div>
 
         {/* mobile: side menu */}
-        <div className={`md:hidden absolute bg-white h-full w-1/2 bottom-0 right-0 py-16 pl-5 pr-3 duration-500 ${openSideMenu ? "right-0":"right-[-50%]"}`}>
+        <div className={`md:hidden absolute bg-white h-full w-[60%] bottom-0 right-0 py-16 pl-6 pr-3 z-20 duration-500 ${openSideMenu ? "right-0":"right-[-60%]"}`}>
         <img src="" alt="" />
         <ul className='space-y-4'>
             {links.map((links) => (
-                <li>{links.label}
+                <li>
+                    <button className='flex items-center gap-3' onClick={()=> openDropdownMenu !== links.label ? setDropdownOpen (links.label): setDropdownOpen("")}>
+                    <a>{links.label}</a>
+                    <img src={links.icon} alt="" />
+                    </button>
+                    
                
                {links.dropdown && (
-                <div>
+                <div className={`${openDropdownMenu === links.label ? 'md:hidden':'hidden'}`}>
                     <ul>
                     { links.list_items.map((items)=>(
                         <li className='flex gap-4 items-center space-y-3 ml-3'>
@@ -129,12 +139,18 @@ const Navbar = () => {
                         </li>
                        ))}
                     </ul>
+                    
                 </div>
                )}
                 </li>
             ))
             }
         </ul>
+
+        <div className='grid grid-rows-2 mr-2 gap-3 mt-6'>
+                <button className=''>Login</button>
+                <button className='outlined-btn'>Register</button>
+            </div>
 
         </div>
     </nav>
