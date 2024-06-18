@@ -8,5 +8,5 @@
 3. Open your terminal in VS Code, run `npm install` to install node modules.
 4. Now, you may run your application with `npm run start`.
 
-###Problem 
+### Problem 
 1. The dropdown doesn't open and close one by one.
